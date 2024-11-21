@@ -1,0 +1,24 @@
+name: GitHub Actions Workflow Hub | Hub Workflow
+
+on:
+  workflow_call:
+    inputs:
+      user_input:
+        description: 'Input from producer'
+        required: true
+        type: string
+
+jobs:
+  hub_job:
+    name: Hub Job
+    uses: jacekmaciag/github_actions_workflow_hub_consumer/.github/workflows/consumer.yml@master
+    secrets: inherit
+    with:
+      user_input: ${{ inputs.user_input }}
+
+#  Add more consumers here. For example:
+#  other_consumer:
+#    uses: jacekmaciag/github_actions_workflow_hub_other_consumer/.github/workflows/consumer.yml@master
+#    secrets: inherit
+#    with:
+#      user_input: ${{ inputs.user_input }}
